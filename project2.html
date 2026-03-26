@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>风别鹤技术交流</title>
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" type="text/javascript"></script>
+  <link href="Styles/middle.css" rel="stylesheet" type="text/css">
+  <link href="Styles/picture.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div class="common">
+
+    <div class="nav">
+      <ul>
+        <li><a href="index.html" title="回到首页">首页</a></li>
+        <li><a href="aboutUs.html" title="个人简介">个人简介</a></li>
+        <li><a class="selected" href="project.html" title="技术展示">技术展示</a></li>
+        <li><a href="contactUs.html" title="关于我">关于我</a></li>
+      </ul>
+    </div>
+
+    <div class="w1003">
+      <div class="boxa" style="margin-top:0px;">
+        <div class="w733 fl" style="height:720px;">
+          <div class="highlight_tip">
+            <ul class="tab clear">
+              <li class="navigation"><a href="#"><img src="main_files/img0/1.png" width="120" height="90" /></a></li>
+              <li class="navigation"><a href="#"><img src="main_files/img0/2.png" width="120" height="90" /></a></li>
+              <li class="navigation"><a href="#"><img src="main_files/img0/3.png" width="120" height="90" /></a></li>
+              <li class="navigation"><a href="#"><img src="main_files/img0/4.png" width="120" height="90" /></a></li>
+              <li class="navigation"><a href="#"><img src="main_files/img0/5.png" width="120" height="90" /></a></li>
+              <li class="navigation"><a href="#"><img src="main_files/img0/6.png" width="120" height="90" /></a></li>
+            </ul>
+          </div>
+          <div class="v_content_list">
+            <ul class="clear">
+              <li><a href="#"><img src="main_files/img0/1.png" width="960" height="720" /></a></li>
+              <li><a href="#"><img src="main_files/img0/2.png" width="960" height="720" /></a></li>
+              <li><a href="#"><img src="main_files/img0/3.png" width="960" height="720" /></a></li>
+              <li><a href="#"><img src="main_files/img0/4.png" width="960" height="720" /></a></li>
+              <li><a href="#"><img src="main_files/img0/5.png" width="960" height="720" /></a></li>
+              <li><a href="#"><img src="main_files/img0/6.png" width="960" height="720" /></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mainBusiness">小胖龙学颜色</div>
+
+    <div style="width:250px;font-size:24px;margin-left:413px;margin-bottom:20px;">
+      <span class="page"><a href="project.html"> 1 </a> </span>
+      <span class="page"> 2 </span>
+    </div>
+
+    <div style="height: 144px;"></div>
+
+    <div class="footer-nav">
+      <ul>
+        <li><a href="index.html" title="回到首页">首页</a></li>
+        <li><a href="aboutUs.html" title="个人简介">个人简介</a></li>
+        <li><a href="project.html" title="技术展示">技术展示</a></li>
+        <li><a href="contactUs.html" title="关于我">关于我</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>风别鹤技术交流</p>
+      <p>COPYRIGHT 风别鹤技术交流</p>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(start);
+    function start()
+    {
+      var picWidth = $(".v_content_list").width(); //获取显示焦点图的宽度
+      var len = $(".v_content_list ul li").length; //获取焦点图个数
+      var img_container = $(".v_content_list ul"); //定义变量
+      var button_container = $(".highlight_tip li"); //定义变量
+      var index = 0; //初始化index=0
+      //设置tab按钮的背景透明度为0.5
+      //$(".highlight_bg").css("opacity","0.5")
+      //为tab按钮添加鼠标滑入事件，以显示相应的内容
+      button_container.mouseenter(function ()
+      {
+        index = button_container.index(this);
+        showPics(index);
+      }).eq(0).trigger("mouseenter");
+      //计算出外围ul元素的宽度
+      img_container.css("width", picWidth * (len));
+      //鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+      $(".v_content_list").hover(function ()
+      {
+        clearInterval(picTimer);
+      }, function ()
+      {
+        picTimer = setInterval(function ()
+        {
+          showPics(index);
+          index++;
+          if (index == len) { index = 0; }
+        }, 3000); //代表自动播放的间隔，单位：毫秒，1秒=1000毫秒
+      }).trigger("mouseleave");
+      //显示图片函数，根据接收的index值显示相应的内容
+      function showPics(index)
+      { //默认效果
+        var nowLeft = -index * picWidth; //根据index值计算ul元素的left值
+        img_container.stop(true, false).animate({ "left": nowLeft }, 300); //通过animate()调整ul元素滚动到计算出的position
+        button_container.eq(index).addClass("current").siblings().removeClass("current"); //为当前的tab按钮添加class="current"
+      }
+    }
+  </script>
+</body>
+
+</html>
